@@ -1,24 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
-
+import './pages/AllApp.css';
+import Layout from './Components/Navbar/Layout';
+import { Route,Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ContactUs from './pages/ContactUs';
+import About from './pages/About';
+import BuyGpt from './pages/BuyGpt';
+import Login from './pages/Login';
+import AddAdv from './pages/AddAdv';
+import Missing from './pages/Missing';
+import Register from './pages/Register';
+import { DataProvider } from './context/Datacontext';
+import Admin from './pages/Admin';
+import Gptadmin from './pages/Gptadmin';
+import Problems from './pages/Problems';
+import Adminaddadv from './pages/Adminaddadv';
+import Statistics from './pages/Statistics';
+import Openion from './pages/Openion';
+import Errors from './pages/Errors';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <Routes>
+          <Route path='/' element={<Layout/>}>
+            <Route index element={<HomePage/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/statistics' element={<Statistics/>}/>
+            <Route path='/gpt' element={<BuyGpt/>}/>
+            <Route path='/gptadmin' element={<Gptadmin/>}/>
+            <Route path='/contactus' element={<ContactUs/>}/>
+            <Route path='/problems' element={<Problems/>}/>
+            <Route path='/addadv' element={<AddAdv/>}/>
+            <Route path='/adminaddadv' element={<Adminaddadv/>}/>
+            <Route path='/register' element={<Register/>}/>
+            <Route path='/admin' element={<Admin/>}/>
+            <Route path='/openion' element={<Openion/>}/>
+            <Route path='/errors' element={<Errors/>}/>
+            <Route path='*' element={<Missing/>}/>
+          </Route>
+      </Routes>  
+    </DataProvider>
   );
 }
 
