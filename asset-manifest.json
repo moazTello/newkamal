@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/newkamal/static/css/main.e3d2201d.css",
-    "main.js": "/newkamal/static/js/main.0d67fba6.js",
+    "main.css": "/newkamal/static/css/main.97d029f8.css",
+    "main.js": "/newkamal/static/js/main.ee899fe7.js",
     "static/media/test.svg": "/newkamal/static/media/test.daf0b6835b5c64bacb6614384d700c74.svg",
     "static/media/mainback.svg": "/newkamal/static/media/mainback.11854d96231e404ae502.svg",
     "static/media/Logo.svg": "/newkamal/static/media/Logo.0996a95c585d4c3af7c9deacf789ac8e.svg",
     "static/media/LoginPerson.svg": "/newkamal/static/media/LoginPerson.133c0fcb22ce235b0d1ef35812f1f87b.svg",
     "static/media/Open.svg": "/newkamal/static/media/Open.3407ed87a3971d548e010034a9d57238.svg",
     "index.html": "/newkamal/index.html",
-    "main.e3d2201d.css.map": "/newkamal/static/css/main.e3d2201d.css.map",
-    "main.0d67fba6.js.map": "/newkamal/static/js/main.0d67fba6.js.map"
+    "main.97d029f8.css.map": "/newkamal/static/css/main.97d029f8.css.map",
+    "main.ee899fe7.js.map": "/newkamal/static/js/main.ee899fe7.js.map"
   },
   "entrypoints": [
-    "static/css/main.e3d2201d.css",
-    "static/js/main.0d67fba6.js"
+    "static/css/main.97d029f8.css",
+    "static/js/main.ee899fe7.js"
   ]
 }
