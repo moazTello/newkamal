@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import Open from '../images/Open.svg';
 import Marquee from "react-fast-marquee";
 import {BsBookmarkCheckFill,BsWhatsapp} from 'react-icons/bs';
+import { useContext } from 'react';
+import DataContext from '../context/Datacontext';
 const HomePage = () => {
-  return (
+    const {openions} = useContext(DataContext);
+    return (
+    
     <div className='home_all'>
         <div className='home_sector_1'>
             <p className='home_sector_1_descripe' > ؟ GPT-3.5 Turbo ما هو </p>
@@ -20,8 +24,14 @@ const HomePage = () => {
         <div className='home_sector_marqee'>
             <p className='marqee_oppenien'>آراء العملاء</p>
             <Marquee style={{backgroundColor:'white'}} direction="right" pauseOnHover="true">
-                <p className='marqee_text'>عميل : استخدامي لشات جي بي تي تربو لم تعد مجرد تسلية فقط بل أصبحت شغفآ </p>
-                <p className='marqee_text'>عميل : استخدامي لشات جي بي تي تربو لم تعد مجرد تسلية فقط بل أصبحت شغفآ</p>
+            {openions?.map(op => (
+                <p 
+                  className='marqee_text'
+                  key={op.pk} 
+                >
+                   عميل : {op.description}
+                </p>
+            ))}
             </Marquee>    
         </div>
         <div className='home_sector_2'>

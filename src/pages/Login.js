@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import DataContext from '../context/Datacontext';
 import Marquee from "react-fast-marquee";
 const Login = () => {
-    const {userName,setUserName,password,setPassword,handleSubmitlogin} = useContext(DataContext);
+    const {password,setPassword,handleSubmitlogin,openions,advPhone,setAdvPhone} = useContext(DataContext);
     return (
     <div className='container' style={{flexDirection:'column'}} >
         <div className='loginbox' style={{border:`solid 1px rgb(74,153,233)`}}>
            <img src={LoginPerson} alt='' className='LoginPerson'/>
-           <form className='newclassform' onSubmit={handleSubmitlogin} >
+           <form className='newclassform' onSubmit={handleSubmitlogin}>
+                <p>admin : +963988140521 , pass : aa</p>
                 <div className='addInput' > 
                     <input 
                         style={{border:'solid 1px rgb(74,153,233)',color:'rgb(74,153,233)'}}
@@ -17,8 +18,8 @@ const Login = () => {
                         id="username"
                         type="text"
                         required
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        value={advPhone}
+                        onChange={(e) => setAdvPhone(e.target.value)}
                     />
                     <label htmlFor='username' className='labellog'>
                       رقم الجوال
@@ -56,9 +57,15 @@ const Login = () => {
       </div>
       <div className='home_sector_marqee' style={{marginTop:'30px',backgroundColor:'white'}}>
             <p className='marqee_oppenien'>آراء العملاء</p>
-            <Marquee direction="right" pauseOnHover="true">
-                <p className='marqee_text'>عميل : استخدامي لشات جي بي تي تربو لم تعد مجرد تسلية فقط بل أصبحت شغفآ </p>
-                <p className='marqee_text'>عميل : استخدامي لشات جي بي تي تربو لم تعد مجرد تسلية فقط بل أصبحت شغفآ</p>
+            <Marquee style={{backgroundColor:'white'}} direction="right" pauseOnHover="true">
+            {openions?.map(op => (
+                <p 
+                  className='marqee_text'
+                  key={op.pk} 
+                >
+                    عميل : {op.description} 
+                </p>
+            ))}
             </Marquee>    
         </div>
     </div>

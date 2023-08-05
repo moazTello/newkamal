@@ -1,17 +1,18 @@
 import React,{ useContext, useState } from 'react'
 import './Navstyle.css';
-import {AiFillTwitterCircle , AiFillInstagram ,AiFillLinkedin,AiOutlineMail,AiOutlinePhone, AiOutlineClose} from 'react-icons/ai';
-import {BsFacebook} from 'react-icons/bs';
+import {AiFillTwitterCircle , AiFillInstagram ,AiOutlineMail,AiOutlinePhone, AiOutlineClose} from 'react-icons/ai';
+// import {BsFacebook} from 'react-icons/bs';
 import { BiMenu } from 'react-icons/bi';
-// import Nav_photo from '../../images/Nav_photo.svg';
 import test from '../../images/test.svg';
-
 import { Link } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
 import DataContext from '../../context/Datacontext';
 
 const Navbar = () => {
-    const {logedInUser,logout,isAdmin} = useContext(DataContext);
+    const {logedInUser,logout,isAdmin,
+        // getAdminAdvertises,getusersAdvertises,
+        getAllAddv,getSingleUserAdv,getAdminContactsErrors,getAdminStatistic,getAdminBaka,getUserBaka
+    } = useContext(DataContext);
     const { width } = useWindowSize();
     const [ clicked , setClicked ] = useState(false);
     const handleClick = () => {
@@ -25,23 +26,23 @@ const Navbar = () => {
     <div className='nav_main'>
        <nav className='nav_1'>
         <div className='facebook_container' style={{}}>
-                <a href="https://www.facebook.com/photo?fbid=900680114680665&set=a.167878474627503">
+                {/* <a href="https://facebook.com">
                     <BsFacebook size={22} style={{color:"white"}}/>
+                </a> */}
+                <a href="https://twitter.com/Mufid_Ai?t=yOyA1lYzW12VlL4NBs7-tg&s=09">
+                    <AiFillTwitterCircle size={28} style={{color:"white",marginRight:'5px'}}/>
                 </a>
-                <a href="https://moaztello.github.io/junior">
-                    <AiFillTwitterCircle size={26} style={{color:"white"}}/>
+                <a href="https://instagram.com/mufid_ai?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D">
+                    <AiFillInstagram size={30} style={{color:"white"}}/>
                 </a>
-                <a href="https://www.instagram.com/p/Cn4df45KfAirdAYW7VB_VJi5eLKTb4SHqXjRmU0/">
-                    <AiFillInstagram size={26} style={{color:"white"}}/>
-                </a>
-                <a href="https://moaztello.github.io/junior">
+                {/* <a href="https://facebook.com">
                     <AiFillLinkedin size={26} style={{color:"white"}}/>
-                </a> 
+                </a>  */}
         </div>
         <div className='facebook_container' style={{}}>
-            <p style={{margin:'10px'}}>+967 777 511 122</p>
+            <p style={{margin:'10px'}}>+967 735 086 916</p>
             <AiOutlinePhone/> 
-            <p style={{margin:'10px'}}>Medhat@gmail.com</p>
+            <a href="https://info@mufidai.com" style={{margin:'10px',textDecoration:'none', color:'white'}}>info@mufidai.com</a>
             <AiOutlineMail/>
         </div>
        </nav>
@@ -58,31 +59,34 @@ const Navbar = () => {
             <Link to='/errors' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>الشكاوي</p> 
             </Link>
+            <Link to='/admin'  className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>اراء العملاء</p>
+            </Link>
             <Link to='/openion' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>آراء العملاء</p> 
             </Link>
             <Link to='/contactus' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>تواصل معنا</p> 
             </Link>
-            <Link to='/problems' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'block' : 'none'}}>
+            <Link to='/problems' className='nav-links' onClick={() => {handleClick();getAdminContactsErrors();}} style={{display:isAdmin ? 'block' : 'none'}}>
                 <p>التواصل و البلاغات</p> 
             </Link>
-            <Link to='/addadv' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
+            <Link to='/addadv' className='nav-links' onClick={() => {handleClick();getSingleUserAdv();}} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>إنشر إعلانك</p> 
             </Link>
-            <Link to='/adminaddadv' className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'block' : 'none'}}>
+            <Link to='/adminaddadv' className='nav-links' onClick={() => {handleClick();getAllAddv();}} style={{display:isAdmin ? 'block' : 'none'}}>
                 <p>إضافة إعلان</p> 
             </Link>
             <Link to='/about'  className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>من نحن</p>
             </Link>
-            <Link to='/statistics'  className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'block' : 'none'}}>
+            <Link to='/statistics'  className='nav-links' onClick={() => {handleClick();getAdminStatistic();}} style={{display:isAdmin ? 'block' : 'none'}}>
                 <p>احصائيات</p>
             </Link>
-            <Link to='/gpt'className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'none' : 'block'}}>
+            <Link to='/gpt'className='nav-links' onClick={() => {handleClick();getUserBaka();}} style={{display:isAdmin ? 'none' : 'block'}}>
                 <p>GPT-3.5 Turbo باقات</p> 
             </Link>
-            <Link to='/gptadmin'className='nav-links' onClick={handleClick} style={{display:isAdmin ? 'block' : 'none'}}>
+            <Link to='/gptadmin'className='nav-links' onClick={() => {handleClick();getAdminBaka();}} style={{display:isAdmin ? 'block' : 'none'}}>
                 <p>GPT-3.5 Turbo باقات</p> 
             </Link>
             <Link to='/login'  className='nav-links' onClick={handleClick} 
@@ -90,10 +94,10 @@ const Navbar = () => {
             >
                 <p>تسجيل الدخول</p> 
             </Link>
-            <Link to='/'  className='nav-links' onClick={logout} style={{display:logedInUser ? 'block' : 'none'}}>
+            <Link to='/newkamal'  className='nav-links' onClick={() => {logout();handleClick();}} style={{display:logedInUser ? 'block' : 'none'}}>
                 <p>تسجيل الخروج</p> 
             </Link>
-            <Link to='/'  className='nav-links' onClick={handleClick}>
+            <Link to='/newkamal'  className='nav-links' onClick={handleClick}>
                 <p>الرئيسية</p> 
             </Link>
         </ul>

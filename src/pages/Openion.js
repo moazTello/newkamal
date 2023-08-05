@@ -1,31 +1,14 @@
 import React from 'react';
 import { useContext } from 'react';
-// import { Link } from 'react-router-dom';
 import DataContext from '../context/Datacontext';
-// import useWindowSize from '../hooks/useWindowSize';
-
 const Openion = () => {
-    const {contactMessage,setContactMessage,emailContact,setEmailContact,handleSubmitContact} = useContext(DataContext);
-  // const { width } = useWindowSize();
+    const {userOpenion, setUserOpenion ,handleSubmitOpenion} = useContext(DataContext);
 
   return (
     <div className='container'>
         <div className='loginbox' style={{border:`solid 1px rgb(74,153,233)`}}>
-           <form className='newclassform' onSubmit={handleSubmitContact} >
-                <div className='addInput' > 
-                    <input 
-                        style={{border:'solid 1px rgb(74,153,233)',color:'rgb(74,153,233)'}}
-                        className='inputs' 
-                        id="username"
-                        type="text"
-                        required
-                        value={emailContact}
-                        onChange={(e) => setEmailContact(e.target.value)}
-                    />
-                    <label htmlFor='username' className='labellog'>
-                      اسم العميل
-                    </label>
-                </div> 
+          <p style={{color:'rgb(74,153,233)',marginBottom:'4px'}}>أضف رئياً</p>
+           <form className='newclassform' onSubmit={handleSubmitOpenion} >
                 <div className='addInput'> 
                     <textarea
                         style={{border:`solid 1px rgb(74,153,233)`,color:'rgb(74,153,233)'}} 
@@ -33,8 +16,8 @@ const Openion = () => {
                         id="password"
                         type="text"
                         required
-                        value={contactMessage}
-                        onChange={(e) => setContactMessage(e.target.value)}
+                        value={userOpenion}
+                        onChange={(e) => setUserOpenion(e.target.value)}
                     />
                     <label htmlFor='password' className='labellog'>
                       رأي العميل
@@ -48,7 +31,7 @@ const Openion = () => {
                         style={{
                           border:`solid 1px rgb(74,153,233)`,
                         }}>
-                    ارسال
+                     ارسال الرأي
                     </button>
                 </div>           
            </form>

@@ -18,25 +18,33 @@ import Adminaddadv from './pages/Adminaddadv';
 import Statistics from './pages/Statistics';
 import Openion from './pages/Openion';
 import Errors from './pages/Errors';
+import RequireAuth from './pages/RequireAuth';
+import Editimage from './pages/Editimage';
+import Paypal from './pages/Paypal';
 function App() {
   return (
     <DataProvider>
       <Routes>
           <Route path='/' element={<Layout/>}>
-            <Route index element={<HomePage/>}/>
+            {/* <Route index element={<HomePage/>}/> */}
+            <Route path='/newkamal' element={<HomePage/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/about' element={<About/>}/>
-            <Route path='/statistics' element={<Statistics/>}/>
             <Route path='/gpt' element={<BuyGpt/>}/>
-            <Route path='/gptadmin' element={<Gptadmin/>}/>
             <Route path='/contactus' element={<ContactUs/>}/>
-            <Route path='/problems' element={<Problems/>}/>
             <Route path='/addadv' element={<AddAdv/>}/>
-            <Route path='/adminaddadv' element={<Adminaddadv/>}/>
             <Route path='/register' element={<Register/>}/>
-            <Route path='/admin' element={<Admin/>}/>
             <Route path='/openion' element={<Openion/>}/>
             <Route path='/errors' element={<Errors/>}/>
+            <Route path='/editimage' element={<Editimage/>}/>
+            <Route path='/paypal' element={<Paypal/>}/>
+            <Route element={<RequireAuth/>}>
+              <Route path='/statistics' element={<Statistics/>}/>
+              <Route path='/gptadmin' element={<Gptadmin/>}/>
+              <Route path='/adminaddadv' element={<Adminaddadv/>}/>
+              <Route path='/admin' element={<Admin/>}/>
+              <Route path='/problems' element={<Problems/>}/>
+            </Route>
             <Route path='*' element={<Missing/>}/>
           </Route>
       </Routes>  
