@@ -57,6 +57,7 @@ export const DataProvider = ({ children }) => {
   const [priceOfBaka, setPriceOfBaka ] = useState('');
   const [gptAdminBakas , setGptAdminBakas ] = useState([]);
 
+  const [userAwiatAdminBakas , setUserAwaitAdminBakas ] = useState([])
 
   const [userBakas,setUserBakas] = useState([]);
   const navigate = useNavigate();
@@ -89,16 +90,15 @@ export const DataProvider = ({ children }) => {
     setAdminContacts(JSON.parse(localStorage.getItem('AdminContacts')));
     setGptAdminBakas(JSON.parse(localStorage.getItem('AdminBakas')));
     setUserBakas(JSON.parse(localStorage.getItem('UserBakas')));
+    setUserAwaitAdminBakas(JSON.parse(localStorage.getItem('UserAwaitsBakas')));
   },[logedInUser,setAuth])
   useEffect(() => {
     const fetchOpenions = async () =>{ 
         try{
             const response = await axios.get('/user/opinion/')
             setOpenions(response.data);
-            console.log(response);
         }
         catch(err){
-            console.log(err)
         }
     }
     fetchOpenions();
@@ -110,12 +110,10 @@ export const DataProvider = ({ children }) => {
           const response2 = await axiosPrivate.get(
               '/dashboard/opinions/',
           );
-          console.log(response2);
           setAdminOpenions(response2.data);
           localStorage.setItem('adminopenions',JSON.stringify(response2.data));
         }  
         catch(err){
-          console.log(err);
         }
       }
     }
@@ -319,7 +317,6 @@ export const DataProvider = ({ children }) => {
       navigate('/login');
     }
     catch(err){
-      console.log(err);
       alert(err.response.data.phone ? 'عذراً هذا الرقم موجود مسبقاً' : '')
     }
   }
@@ -340,7 +337,6 @@ export const DataProvider = ({ children }) => {
       setContactMessage('');
   }
   catch(err){
-      console.log(err);
   }
   }
   const handleSubmitError = async (e) => {
@@ -360,7 +356,6 @@ export const DataProvider = ({ children }) => {
       setContactMessage('');
     }
     catch(err){
-        console.log(err);
     }
   }
   const getSingleUserAdv = async () => {
@@ -370,10 +365,8 @@ export const DataProvider = ({ children }) => {
       )
       localStorage.setItem('singleUserAdvers',JSON.stringify(response.data));
       setSingleUserAddv(response.data);
-      console.log(response)
     }
     catch(err){
-        console.log(err);
     }
   }
   const sendUserAdv = async (e) => {
@@ -403,26 +396,24 @@ export const DataProvider = ({ children }) => {
       setAdvUrl('');
     }
     catch(err){
-        alert(err.response.data.URL ? 'رابط الاعلان غير صحيح' : '')
-        console.log(err);
+        alert(err?.response?.data?.URL ? 'رابط الاعلان غير صحيح' : 'سجل دخولك أولاً')
     }
   }
   const handleSubmitlogin = async (e) => {
     e.preventDefault();
     try{
-      const response = await axiosPrivate.post(
+      const response = await axios.post(
         '/',
         {
           "phone":advPhone,
           "password":password
         }
       );
-      console.log(response)
       localStorage.setItem('auth',JSON.stringify({phone:response?.data?.phone,country:response?.data?.country,accessToken:response?.data?.access,refreshToken:response?.data?.refresh,admin:response.data.type}))
       localStorage.setItem('logedIn',true);
       if(response.data.type === 'admin'){
         setIsAdmin(true);
-        navigate('/admin')
+        navigate('/admin');
       }
       else{
         setIsAdmin(false);
@@ -430,12 +421,8 @@ export const DataProvider = ({ children }) => {
       }
       setLogedInUser(true);
       setAuth({userName,password,accessToken:response?.data?.access,refreshToken:response?.data?.refresh,admin:response.data.type});
-      console.log(localStorage.getItem('auth'))
-      console.log(auth?.accessToken)
-      console.log(response.data.access);
     }
     catch(err){
-      console.log(err);
       alert('تأكد من المعلومات التي ادخلتها');
     }
   }
@@ -452,7 +439,6 @@ export const DataProvider = ({ children }) => {
         localStorage.setItem('adminadvertises',JSON.stringify(response.data))      
       }
       catch(err){
-        console.log(err);
       }
   }
   const getusersAdvertises = async () => {
@@ -464,13 +450,11 @@ export const DataProvider = ({ children }) => {
             // "password":password
           }
         )
-        console.log(response);
         setUsersadvertizeorder(response.data);
         localStorage.setItem('usersadvertizeorder',JSON.stringify(response.data))      
 
       }
       catch(err){
-        console.log(err);
       }
   }
   const getActiveAddv = async () => {
@@ -479,13 +463,11 @@ export const DataProvider = ({ children }) => {
         '/dashboard/active-advertisement/',
         {}
       )
-      console.log(response);
       setactiveAddv(response.data);
       localStorage.setItem('activeAddv',JSON.stringify(response.data));      
 
     }
     catch(err){
-      console.log(err);
     }
   }
   const getPayedAwaitAddv = async () => {
@@ -494,12 +476,10 @@ export const DataProvider = ({ children }) => {
         '/dashboard/yemen-pending-advertisement/',
         {}
       )
-      console.log(response);
       setUserPayedAddv(response.data);
       localStorage.setItem('userPayedAddv',JSON.stringify(response.data));      
     }
     catch(err){
-      console.log(err);
     }
   }
   const getAllAddv = async () => {
@@ -521,7 +501,6 @@ export const DataProvider = ({ children }) => {
           setUserOpenion('');
     }
     catch(err){
-        console.log(err);
     }
   }
   const getAdminContactsErrors = async () => {
@@ -532,18 +511,15 @@ export const DataProvider = ({ children }) => {
       setAdminErrors(response.data);
       localStorage.setItem('AdminContacts',JSON.stringify(response2.data));
       localStorage.setItem('AdminErrors',JSON.stringify(response.data));
-      console.log(response);
-      console.log(response2);
 
   }
   catch(err){
-      console.log(err);
   }
   }
   const sendAdv = async (e) => {
     e.preventDefault();
     try{
-      const response = await axiosPrivate.post(
+       await axiosPrivate.post(
         '/dashboard/advertisement/',
         {
           "name": advName,
@@ -558,10 +534,8 @@ export const DataProvider = ({ children }) => {
     )
     alert('تم ارسال اعلان الآدمن بنجاح');
     getAdminAdvertises();
-    console.log(response);
     }
     catch(err){
-        console.log(err);
     }
   }
   const getAdminStatistic = async () => {
@@ -569,10 +543,8 @@ export const DataProvider = ({ children }) => {
       const response2 = await axiosPrivate.get('/dashboard/user-country/')
       setStatistics(response2.data);
       localStorage.setItem('statistics',JSON.stringify(response2.data));
-      console.log(response2);
     }
     catch(err){
-        console.log(err);
     }
   }
   const getAdminBaka = async () => {
@@ -582,16 +554,14 @@ export const DataProvider = ({ children }) => {
     )
     setGptAdminBakas(response.data);
     localStorage.setItem('AdminBakas',JSON.stringify(response.data));
-    console.log(response);
     }
     catch(err){
-        console.log(err);
     }
   }
   const sendAdminBaka = async (e) => {
     e.preventDefault();
     try{
-      const response = await axiosPrivate.post(
+      await axiosPrivate.post(
         '/dashboard/plan/',
         {
           "name": nameBaka,
@@ -601,25 +571,33 @@ export const DataProvider = ({ children }) => {
     )
     alert('تم ارسال باقة جديدة بنجاح');
     getAdminBaka();
-    console.log(response);
     }
     catch(err){
-        console.log(err);
     }
   }
   const getUserBaka = async () => {
     try{
-      const response = await axiosPrivate.get(
+      const response = await axios.get(
         '/user/plan/',
     )
     setUserBakas(response.data);
     localStorage.setItem('UserBakas',JSON.stringify(response.data));
-    console.log(response);
     }
     catch(err){
-        console.log(err);
     }
   }
+  const getUserAwaitBakas = async () => {
+    try{
+      const response = await axiosPrivate.get(
+        '/dashboard/active-user/',
+    )
+    setUserAwaitAdminBakas(response.data);
+    localStorage.setItem('UserAwaitsBakas',JSON.stringify(response.data));
+    }
+    catch(err){
+    }  
+  }
+
     return(
         <DataContext.Provider value={{
             userName,setUserName,password,setPassword,handleSubmitlogin,handleSubmitRegister,
@@ -641,7 +619,8 @@ export const DataProvider = ({ children }) => {
             openions,adminOpenions,
             getAdminStatistic,statistics, setStatistics,
             nameBaka , setNameBaka ,daysOfBaka , setDaysOfBaka ,priceOfBaka, setPriceOfBaka , gptAdminBakas , setGptAdminBakas ,sendAdminBaka,
-            getAdminBaka,getUserBaka,userBakas
+            getAdminBaka,getUserBaka,userBakas,userAwiatAdminBakas,getUserAwaitBakas,
+            
         }}>
             {children}
         </DataContext.Provider>

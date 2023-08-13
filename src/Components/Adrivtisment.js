@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import DataContext from '../context/Datacontext'
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import {IoIosImage} from 'react-icons/io';
+import Paypaladv from '../pages/Paypaladv';
 const Adrivtisment = ({addd,yaman}) => {
   const axiosPrivate = useAxiosPrivate();
   const {isAdmin,getSingleUserAdv,getPayedAwaitAddv,getusersAdvertises} = useContext(DataContext);
@@ -169,7 +170,9 @@ const Adrivtisment = ({addd,yaman}) => {
                         }}>رفض الاعلان</button></>}
         </div>
         {yaman && addd?.price && !isAdmin && <div className='Image' style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-        
+        <p className='addsmale' style={{color:'red',fontSize:'14px',marginTop:'2px',textAlign:'right'}}>+967 254091331 للايداع عبر العمقي حساب رقم</p>
+        <p className='addsmale' style={{color:'red',fontSize:'14px',marginTop:'2px',textAlign:'right'}}>او تحويل بإسم : فهد عبدالله حيمد حمدان</p>
+           
           {
               image?.image ? 
               <img  src={image.image} style={{width:'100px'}} alt=''/>:
@@ -188,6 +191,12 @@ const Adrivtisment = ({addd,yaman}) => {
               }}>
                 ارسال صورة الحوالة
               </button>     
+        </div>}
+        {!yaman && addd?.price && !isAdmin && <div className='Image' style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',marginTop:'15px'}}> 
+          <Paypaladv
+            price={addd?.price}
+            pk={addd?.pk}
+          />    
         </div>}
        </div>
     </div>

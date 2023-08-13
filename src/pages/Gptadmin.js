@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import DataContext from '../context/Datacontext';
 import Bakat from '../Components/Bakat';
 
 const Gptadmin = () => {
-  const {nameBaka , setNameBaka ,daysOfBaka , setDaysOfBaka ,priceOfBaka, setPriceOfBaka , gptAdminBakas  , sendAdminBaka} = useContext(DataContext);
+  const {nameBaka , setNameBaka ,daysOfBaka , setDaysOfBaka ,priceOfBaka, setPriceOfBaka , gptAdminBakas  , sendAdminBaka ,getUserAwaitBakas,getAdminBaka ,userAwiatAdminBakas} = useContext(DataContext);
+  const [bakaType,setBakaType] = useState('1');
   return (
     <div className='container' style={{flexDirection:"column"}}>
         <div className='loginbox' style={{border:`solid 1px rgb(74,153,233)`}}>
@@ -66,7 +67,21 @@ const Gptadmin = () => {
                 </div>           
            </form>
       </div>
-      <p style={{width:'100%',textAlign:'center',marginTop:'20px',color:'rgb(74,153,233)',paddingTop:'10px',paddingBottom:'10px',backgroundColor:"white"}}> باقات الواتساب </p>
+      <button className='btn' 
+                        onClick={() => {setBakaType('1');getAdminBaka();}}
+                        style={{
+                          marginTop:'10px',
+                          border:`solid 1px rgb(74,153,233)`,
+                        }}>الباقات المتوفرة</button>
+      <button className='btn' 
+                        onClick={() => {setBakaType('2');getUserAwaitBakas();}}
+                        style={{
+                          marginTop:'10px',
+                          border:`solid 1px rgb(74,153,233)`,
+                        }}>طلبات تفعيل الباقات من العملاء  </button>
+      {bakaType === '2' &&<p style={{width:'100%',textAlign:'center',marginTop:'20px',color:'rgb(74,153,233)',paddingTop:'10px',paddingBottom:'10px',backgroundColor:"white"}}> طلبات تفعيل الباقات من العملاء </p>}
+      {bakaType === '1' &&<p style={{width:'100%',textAlign:'center',marginTop:'20px',color:'rgb(74,153,233)',paddingTop:'10px',paddingBottom:'10px',backgroundColor:"white"}}> باقات الواتساب التي اضافها الآدمن</p>}
+      {bakaType === '1' && <>
       <div className='admin_advertises'>
           {gptAdminBakas?.map(addd => (
                 <Bakat 
@@ -76,7 +91,18 @@ const Gptadmin = () => {
                 />
             ))}
             {!gptAdminBakas?.length && <p style={{width:'100%',textAlign:'center',marginTop:'20px',color:'rgb(74,153,233)',paddingTop:'10px',paddingBottom:'10px',backgroundColor:"white"}}>لا يوجد اي باقات</p>}
-      </div>
+      </div></>}
+      {bakaType === '2' && <>
+      <div className='admin_advertises'>
+          {userAwiatAdminBakas?.map(addd => (
+                <Bakat 
+                  className=''
+                  key={addd.pk} 
+                  addd={addd}
+                />
+            ))}
+            {!userAwiatAdminBakas?.length && <p style={{width:'100%',textAlign:'center',marginTop:'20px',color:'rgb(74,153,233)',paddingTop:'10px',paddingBottom:'10px',backgroundColor:"white"}}>لا يوجد اي طلب</p>}
+      </div></>}
     </div>
     )
 }

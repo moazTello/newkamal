@@ -1,6 +1,6 @@
 import React from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
-const Paypal = ({price,phoneBaka,number_of_day}) => {
+const Paypaladv = ({price,pk}) => {
    const PAY_PAL = "AVhwNDK4-TkjN7dVszNc_UqJU88q-_OYwkj3B90bwko0Y57zwgfPEfUjVKdO0YnKcYu0mtgyXC4EY--1";
 //    const [cash,setCash] = useState('');
 //    const [okkk,setOkkk] = useState(false);
@@ -20,7 +20,7 @@ const Paypal = ({price,phoneBaka,number_of_day}) => {
             >
             <PayPalButtons 
                 createOrder={async(data,actions) => {
-                    console.log(`${phoneBaka} ${number_of_day} Baka`);
+                    console.log(`${pk} adv`);
                     return await actions.order.create({
                         purchase_units:[
                             {
@@ -28,7 +28,7 @@ const Paypal = ({price,phoneBaka,number_of_day}) => {
                                     currency_code:'USD',
                                     value:price,
                                 },
-                                description:`${phoneBaka}  ${number_of_day}  Baka`,
+                                description:`${pk} adv`,
                                 // custom_id:JSON.parse(localStorage.getItem('auth')?.phone),
                                 // payment_type:isBaka ? 'Baka' : 'Adver'
                             },
@@ -51,4 +51,4 @@ const Paypal = ({price,phoneBaka,number_of_day}) => {
   )
 }
 
-export default Paypal;
+export default Paypaladv;

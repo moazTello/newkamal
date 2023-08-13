@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    
 }
 .nav_1{
     /* background: linear-gradient(to right,rgb(41,47,105) , rgb(50,107,174)); */
@@ -49,6 +50,7 @@
     width: 100%;
     justify-content: end;
     margin-right: 2rem;
+    z-index: 1;
 }
 .nav-links{
     text-decoration: none;

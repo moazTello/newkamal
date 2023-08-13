@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 // import {BsFacebook} from 'react-icons/bs';
 import {AiFillTwitterCircle , AiFillInstagram } from 'react-icons/ai';
-import Logo from '../../images/Logo.svg';
-
+// import Logo from '../../images/Logo.svg';
+import Logo from '../../images/logo.png';
+import DataContext from '../../context/Datacontext';
 const Footer = () => {
+  const {logedInUser,logout,isAdmin,
+    // getAdminAdvertises,getusersAdvertises,
+    getAllAddv,getSingleUserAdv,getAdminContactsErrors,getAdminStatistic,getAdminBaka,getUserBaka,getUserAwaitBakas
+} = useContext(DataContext);
   return (
     <div className='footer'>
       <div className='footer_sector'>
@@ -28,28 +33,56 @@ const Footer = () => {
         </div>
       </div>
       <div className='footer_sector'>
-        <Link to='/contactus' className='footer-links'>
-          <p>تواصل معنا</p> 
-        </Link>
-        <Link to='/addadv' className='footer-links'>
-          <p>إضافة إعلان</p> 
-        </Link>
-        <Link to='/about'  className='footer-links'>
-          <p>من نحن</p>
-        </Link>
+      <Link to='/errors' className='footer-links' style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>الشكاوي</p> 
+            </Link>
+            <Link to='/admin'  className='footer-links' style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>اراء العملاء</p>
+            </Link>
+            <Link to='/openion' className='footer-links' style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>آراء العملاء</p> 
+            </Link>
+            <Link to='/contactus' className='footer-links' style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>تواصل معنا</p> 
+            </Link>
+            <Link to='/problems' className='footer-links' onClick={() => {getAdminContactsErrors();}} style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>التواصل و البلاغات</p> 
+            </Link>
+            <Link to='/addadv' className='footer-links' onClick={() => {getSingleUserAdv();}} style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>إنشر إعلانك</p> 
+            </Link>
+            <Link to='/adminaddadv' className='footer-links' onClick={() => {getAllAddv();}} style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>إضافة إعلان</p> 
+            </Link>
+            
+           
+
       </div>
       <div className='footer_sector'>
-        <Link to='/newkamal'  className='footer-links'>
-          <p>الرئيسية</p> 
-        </Link>
-        <Link to='/login'  className='footer-links'>
-          <p>تسجيل الدخول</p> 
-        </Link>
-        <Link to='/gpt'className='footer-links'>
-          <p>GPT-3.5 Turbo باقات</p> 
-        </Link>
-        
-        
+            <Link to='/newkamal'  className='footer-links'>
+                <p>الرئيسية</p> 
+            </Link>
+            <Link to='/statistics'  className='footer-links' onClick={() => {getAdminStatistic();}} style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>احصائيات</p>
+            </Link>
+            <Link to='/gpt'className='footer-links' onClick={() => {getUserBaka();}} style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>GPT-3.5 Turbo باقات</p> 
+            </Link>
+            <Link to='/gptadmin'className='footer-links' onClick={() => {getAdminBaka();getUserAwaitBakas();}} style={{display:isAdmin ? 'block' : 'none'}}>
+                <p>GPT-3.5 Turbo باقات</p> 
+            </Link>
+            <Link to='/login'  className='footer-links' 
+                  style={{display:logedInUser ? 'none' : 'block'}}
+            >
+                <p>تسجيل الدخول</p> 
+            </Link>
+            <Link to='/newkamal'  className='footer-links' onClick={() => {logout();}} style={{display:logedInUser ? 'block' : 'none'}}>
+                <p>تسجيل الخروج</p> 
+            </Link>
+            <Link to='/about'  className='footer-links' style={{display:isAdmin ? 'none' : 'block'}}>
+                <p>من نحن</p>
+            </Link>
+            
       </div>
       
     </div>

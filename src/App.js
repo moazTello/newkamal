@@ -20,7 +20,7 @@ import Openion from './pages/Openion';
 import Errors from './pages/Errors';
 import RequireAuth from './pages/RequireAuth';
 import Editimage from './pages/Editimage';
-import Paypal from './pages/Paypal';
+// import Paypal from './pages/Paypal';
 function App() {
   return (
     <DataProvider>
@@ -37,7 +37,7 @@ function App() {
             <Route path='/openion' element={<Openion/>}/>
             <Route path='/errors' element={<Errors/>}/>
             <Route path='/editimage' element={<Editimage/>}/>
-            <Route path='/paypal' element={<Paypal/>}/>
+            {/* <Route path='/paypal' element={<Paypal/>}/> */}
             <Route element={<RequireAuth/>}>
               <Route path='/statistics' element={<Statistics/>}/>
               <Route path='/gptadmin' element={<Gptadmin/>}/>
