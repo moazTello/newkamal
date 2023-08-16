@@ -11,7 +11,6 @@ const AdminContact = ({addd,conorerror}) => {
       getAdminContactsErrors();
     }
     catch(err){
-      console.log(err);
     }
   }
   const deleteUserError = async () => {
@@ -22,7 +21,6 @@ const AdminContact = ({addd,conorerror}) => {
 
     }
     catch(err){
-      console.log(err);
     }
   }
   return (

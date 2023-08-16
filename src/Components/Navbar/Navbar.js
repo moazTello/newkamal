@@ -3,7 +3,7 @@ import './Navstyle.css';
 import {AiFillTwitterCircle , AiFillInstagram ,AiOutlineMail,AiOutlinePhone, AiOutlineClose} from 'react-icons/ai';
 // import {BsFacebook} from 'react-icons/bs';
 import { BiMenu } from 'react-icons/bi';
-// import test from '../../images/test.svg';
+import test from '../../images/test.svg';
 import { Link } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
 import DataContext from '../../context/Datacontext';
@@ -47,7 +47,7 @@ const Navbar = () => {
         </div>
        </nav>
        <div className='nav_photo_container'>
-        {/* <img className='nav_photo' src={test} alt=''/> */}
+        <img className='nav_photo' src={test} alt=''/>
        </div>
        <nav className='nav_2'>
             <div className='menu-icon' onClick={handleClick}>
@@ -94,10 +94,10 @@ const Navbar = () => {
             >
                 <p>تسجيل الدخول</p> 
             </Link>
-            <Link to='/newkamal'  className='nav-links' onClick={() => {logout();handleClick();}} style={{display:logedInUser ? 'block' : 'none'}}>
+            <Link to='/'  className='nav-links' onClick={() => {logout();handleClick();}} style={{display:logedInUser ? 'block' : 'none'}}>
                 <p>تسجيل الخروج</p> 
             </Link>
-            <Link to='/newkamal'  className='nav-links' onClick={handleClick}>
+            <Link to='/'  className='nav-links' onClick={handleClick}>
                 <p>الرئيسية</p> 
             </Link>
         </ul>

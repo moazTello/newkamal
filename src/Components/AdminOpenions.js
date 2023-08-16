@@ -6,26 +6,22 @@ const AdminOpenions = ({oppp}) => {
     const {getOpen} = useContext(DataContext);
     const deleteOpen = async () => {
         try{
-            const response = await axiosPrivate.delete(`/dashboard/opinions/${oppp.pk}/`);
+            await axiosPrivate.delete(`/dashboard/opinions/${oppp.pk}/`);
             alert('تم الحذف بنجاح')
             getOpen();
-            console.log(response);
         }
         catch(err){
-            console.log(err)
         }
     }
     const activateOpen = async () => {
         try{
-           const response =  await axiosPrivate.patch(`/dashboard/opinions/${oppp.pk}/`
+            await axiosPrivate.patch(`/dashboard/opinions/${oppp.pk}/`
             ,{"active": true}
             );
             alert('تم التفعيل بنجاح')
             getOpen();
-            console.log(response);
         }
         catch(err){
-            console.log(err)
         }
     }
   return (

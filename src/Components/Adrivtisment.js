@@ -8,6 +8,7 @@ const Adrivtisment = ({addd,yaman}) => {
   const {isAdmin,getSingleUserAdv,getPayedAwaitAddv,getusersAdvertises} = useContext(DataContext);
   const [newPrice , setNewPrice ] = useState(0);
   const [refuse , setRefuse ] = useState('');
+  const [permenantdelete,setPermenantdelete] = useState(false);
   const deleteUserAdv = async () => {
     try{
       await axiosPrivate.delete(`/advertiser/advertisement/${addd.pk}/`)
@@ -15,7 +16,6 @@ const Adrivtisment = ({addd,yaman}) => {
       getSingleUserAdv();
     }
     catch(err){
-      console.log(err);
     }
   };
   const [image,setImage] = useState('');
@@ -37,7 +37,6 @@ const Adrivtisment = ({addd,yaman}) => {
       getPayedAwaitAddv();
     }
     catch(err){
-      console.log(err);
     }
   };
   
@@ -48,7 +47,6 @@ const Adrivtisment = ({addd,yaman}) => {
       getusersAdvertises();
     }
     catch(err){
-      console.log(err.response.data);
     }
   }
   const sendImageYamen = async () => {
@@ -58,7 +56,6 @@ const Adrivtisment = ({addd,yaman}) => {
       image && getSingleUserAdv();
     }
     catch(err){
-      console.log(err);
     }
   }
   const setPriceAdv = async () => {
@@ -73,7 +70,6 @@ const Adrivtisment = ({addd,yaman}) => {
 
       }
       catch(err){
-        console.log(err.response.data);
       }
     }
     else{
@@ -192,10 +188,11 @@ const Adrivtisment = ({addd,yaman}) => {
                 ارسال صورة الحوالة
               </button>     
         </div>}
-        {!yaman && addd?.price && !isAdmin && <div className='Image' style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',marginTop:'15px'}}> 
+        {!yaman && !permenantdelete && addd?.price && !isAdmin && !addd?.active_to_see && <div className='Image' style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',marginTop:'15px'}}> 
           <Paypaladv
             price={addd?.price}
             pk={addd?.pk}
+            setPermenantdelete={setPermenantdelete}
           />    
         </div>}
        </div>

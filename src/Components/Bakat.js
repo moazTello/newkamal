@@ -16,7 +16,6 @@ const Bakat = ({addd}) => {
       getAdminBaka();
     }
     catch(err){
-      console.log(err);
     }
   };
   const activeUserBaka = async () => {
@@ -31,7 +30,6 @@ const Bakat = ({addd}) => {
       getUserAwaitBakas();
     }
     catch(err){
-      console.log(err);
     }
   }
   const [image,setImage] = useState('');
@@ -58,7 +56,6 @@ const Bakat = ({addd}) => {
     }
     catch(err){
       alert('اعد المحاولة')
-      console.log(err);
     }
   }
   const setElectric = () => {
@@ -168,3 +165,7 @@ const Bakat = ({addd}) => {
 }
 
 export default Bakat
+// AY_Hv2sOquUQM8RWarL_t9-mVCqif0OYp2H8V0X8mBwDTWbN2YdfyHo92zKKamRhhj6KMPRZJoeT-IJB client paypal
+// ENXB_-gA-8huLQgr_risclTRa921o2-oDUV5nofuCPrwis_aza5T_2CA8aGXmPSRQtbxA86YejUPggck secret
+// 711671436mufidai facepass
+// mufidai20230@gmail.com  faceemail

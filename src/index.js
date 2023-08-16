@@ -11,9 +11,7 @@ root.render(
     <AuthProvider>
         <Router>
               <Routes>
-                <Route path='/*' element={<App 
-                // defaultZoom={7} places={places} 
-                />}/>
+                <Route path='/*' element={<App/>}/>
               </Routes>
         </Router>
     </AuthProvider>

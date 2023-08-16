@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import {BsFacebook} from 'react-icons/bs';
 import {AiFillTwitterCircle , AiFillInstagram } from 'react-icons/ai';
 // import Logo from '../../images/Logo.svg';
-import Logo from '../../images/logo.png';
+import Logo from '../../images/logo.svg';
 import DataContext from '../../context/Datacontext';
 const Footer = () => {
   const {logedInUser,logout,isAdmin,
@@ -59,7 +59,7 @@ const Footer = () => {
 
       </div>
       <div className='footer_sector'>
-            <Link to='/newkamal'  className='footer-links'>
+            <Link to='/'  className='footer-links'>
                 <p>الرئيسية</p> 
             </Link>
             <Link to='/statistics'  className='footer-links' onClick={() => {getAdminStatistic();}} style={{display:isAdmin ? 'block' : 'none'}}>
@@ -76,7 +76,7 @@ const Footer = () => {
             >
                 <p>تسجيل الدخول</p> 
             </Link>
-            <Link to='/newkamal'  className='footer-links' onClick={() => {logout();}} style={{display:logedInUser ? 'block' : 'none'}}>
+            <Link to='/'  className='footer-links' onClick={() => {logout();}} style={{display:logedInUser ? 'block' : 'none'}}>
                 <p>تسجيل الخروج</p> 
             </Link>
             <Link to='/about'  className='footer-links' style={{display:isAdmin ? 'none' : 'block'}}>

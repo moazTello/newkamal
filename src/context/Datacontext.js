@@ -120,175 +120,6 @@ export const DataProvider = ({ children }) => {
       getOpen();
   },[auth?.admin,axiosPrivate])
   const [ details,setDetails ] = useState('');
-  const [ crop,setCrop ] = useState('');
-  const [image,setImage] = useState({
-      image:'',
-      brightness:100,
-      GrayScale:0,
-      Sepia:0,
-      Saturate:100,
-      Contrast:100,
-      hueRotate:0,
-      rotate:0,
-      vertical:1,
-      horizotal:1
-  });
-  const inputHandle = (e) => {
-      setImage(
-          {
-              ...image,
-              [e.target.name] : e.target.value 
-          }
-      )
-  }
-  const handleImage = (e) => {
-      if(e.target.files.length !== 0){
-          console.log('ok');
-          const reader = new FileReader()
-          reader.onload = () => {
-              setImage({...image,image : reader.result})
-          }
-          reader.readAsDataURL(e.target.files[0])
-      }
-  }
-  const FilterElement = [
-      {
-          name : 'brightness',
-          maxValue:200
-      },
-      {
-          name : 'GrayScale',
-          maxValue:200
-      },
-      {
-          name : 'Sepia',
-          maxValue:200
-      },
-      {
-          name : 'Saturate',
-          maxValue:200
-      },
-      {
-          name : 'Contrast',
-          maxValue:200
-      },
-      {
-          name : 'hueRotate'
-      },
-  ]
-  const [property,setProperty] = useState(
-      {
-          name : 'brightness',
-          maxValue:200
-      }
-  );
-  const leftRotate = () => {
-      setImage(
-          {
-              ...image,
-              rotate:image.rotate - 90
-          }
-      )
-  }
-  const rightRotate = () => {
-    console.log(image);
-      setImage(
-          {
-              ...image,
-              rotate:image.rotate + 90
-          }
-      )
-  }
-  const verticalFlip = () => {
-      setImage(
-          {
-              ...image,
-              vertical:image.vertical === 1 ? -1:1
-          }
-      )
-  }
-  const horizentalFlip = () => {
-      setImage(
-          {
-              ...image,
-              horizotal:image.horizotal === 1 ? -1 : 1
-          }
-      )
-  }
-  const imageCrop = () => {
-      const canvas = document.createElement('canvas')
-      const scaleX = details.naturalWidth / details.width
-      const scaleY = details.naturalHeight / details.height
-      canvas.width = crop.width 
-      canvas.height = crop.height
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(
-          details,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          crop.width,
-          crop.height
-      )
-      const base64Url = canvas.toDataURL('image/jpg')
-      setImage(
-          {
-              ...image,
-              image:base64Url
-          }
-      ) 
-  }
-  const saveImage = async () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = details.naturalWidth
-    canvas.height = details.naturalHeight
-    const ctx = canvas.getContext('2d');
-    ctx.filter = `brightness(${image.brightness}%) 
-                grayscale(${image.GrayScale}%) 
-                contrast(${image.Contrast}%) 
-                sepia(${image.Sepia}%) 
-                saturate(${image.Saturate}%) 
-                `
-    ctx.translate(canvas.width/2,canvas.height/2)
-    ctx.rotate(image.rotate * Math.PI / 180)
-    ctx.scale(image.vertical,image.horizotal)
-    ctx.drawImage(
-        details,
-        -canvas.width/2,
-        -canvas.height/2,
-        canvas.width,
-        canvas.height
-    )
-    const base64Image = canvas.toDataURL();
-    const link = document.createElement('a');
-    link.download = 'image_edited.jpg'
-    link.href = canvas.toDataURL()
-    link.click()
-    // const file = convertBase64ToFile(base64Image,'send.jpg');
-    try{
-        const response = await axiosPrivate.post(
-            '/dashboard/advertisement/',
-            {
-                "name": "asdasd",
-                "country": "asdasd",
-                "description": "asdasd",
-                "URL": "https://advertisements.pythonanywhere.com",
-                "image": base64Image,
-                "cative": false,
-                "price": "1000"
-            }  
-        )
-        alert('تم رفع الاعلان بنجاح');
-        navigate('/')
-        console.log(response);
-    }
-    catch(err){
-        alert('اعد الارسال');
-    }
-  }
   const logout = () => {
     setLogedInUser(false);
     setUserName('');
@@ -298,7 +129,6 @@ export const DataProvider = ({ children }) => {
     setAuth(null);
     localStorage.setItem('logedIn',false);
     localStorage.clear();
-
   }
   const handleSubmitRegister = async (e) =>{
     e.preventDefault();
@@ -417,7 +247,7 @@ export const DataProvider = ({ children }) => {
       }
       else{
         setIsAdmin(false);
-        navigate('/newkamal');
+        navigate('/');
       }
       setLogedInUser(true);
       setAuth({userName,password,accessToken:response?.data?.access,refreshToken:response?.data?.refresh,admin:response.data.type});
@@ -511,7 +341,6 @@ export const DataProvider = ({ children }) => {
       setAdminErrors(response.data);
       localStorage.setItem('AdminContacts',JSON.stringify(response2.data));
       localStorage.setItem('AdminErrors',JSON.stringify(response.data));
-
   }
   catch(err){
   }
@@ -597,15 +426,13 @@ export const DataProvider = ({ children }) => {
     catch(err){
     }  
   }
-
     return(
         <DataContext.Provider value={{
             userName,setUserName,password,setPassword,handleSubmitlogin,handleSubmitRegister,
             logedInUser,setLogedInUser,logout,isAdmin,setIsAdmin,
             contactMessage,setContactMessage,email,setEmail,handleSubmitContact,phoneContact,setPhoneContact,handleSubmitError,getAdminContactsErrors,
             adminContacts,adminErrors,
-            details,setDetails,crop,setCrop,image,setImage,inputHandle,handleImage,FilterElement,
-            property,setProperty,leftRotate,rightRotate,verticalFlip,horizentalFlip,imageCrop,saveImage,
+            details,setDetails,
             advDescription,setAdvDescription,advName,setAdvName,advUrl,setAdvUrl,advCountry,setAdvCountry,advStartDate,setAdvStartDate,advEndDate,setAdvEndDate,sendUserAdv,
             advPhone,setAdvPhone,
             singleUserAddv , setSingleUserAddv,getSingleUserAdv,

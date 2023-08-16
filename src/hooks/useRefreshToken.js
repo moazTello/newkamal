@@ -32,11 +32,6 @@ const useRefreshToken = () => {
           alert('انتهت الجلسة يرجى اعادة تسجيل الدخول');
           // logout()
         } 
-        
-        console.log('errrrrrorr');
-        console.log(err?.response?.data?.detail);
-        console.log(err);
-
       }
     }
   return (
